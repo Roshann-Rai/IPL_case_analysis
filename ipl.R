@@ -5,7 +5,7 @@ library(ggplot2)
 library(forcats)      #fct_reorder() function
 
 #importing dataset
-ipl.df <- read.csv("D:/roshan/ipl_case/ipl_player_performance.csv")
+ipl.df <- read.csv("https://raw.githubusercontent.com/Roshann-Rai/IPL_case_analysis/main/ipl_player_performance.csv")
 head(ipl.df)
 str(ipl.df)
 
