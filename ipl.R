@@ -19,17 +19,23 @@ head(ipl.df)
 
 #Creating a new categorical variable from Avg variable
 ipl.df1 <- ipl.df %>%
-  mutate(Avg.run.category = case_when(Avg < 20 ~ "0-20",
-                                      Avg < 40 & Avg <= 20 ~ "20-40",
-                                      Avg < 60 & Avg <= 40 ~ "40-60",
-                                      Avg < 80 & Avg <= 60 ~ "60-80",
-                                      TRUE ~ "80-100"))
+  mutate(Avg.run.category = case_when(Avg < 20 ~ "Less than 20",
+                                      Avg < 40 & Avg >= 20 ~ "20-40",
+                                      Avg < 60 & Avg >= 40 ~ "40-60",
+                                      Avg < 80 & Avg >= 60 ~ "60-80",
+                                      TRUE ~ "Above 80"),
+         SR.category = case_when(SR < 75 ~ "Less than 75",
+                                 SR < 150 & SR >= 75 ~ "75-150",
+                                 SR < 225 & SR >= 150 ~ "150-225",
+                                 TRUE ~ "Above 225"))
 
 #summary statistics
 summary(ipl.df$Avg)
-summary(ipl.df$Runs)
+summary(ipl.df$SR)
 summary(ipl.df$Salary)
-boxplot(ipl.df$Avg)
+boxplot(ipl.df$Avg)        #It looks like there are two outliers in this variable.
+boxplot(ipl.df$Salary)
+boxplot(ipl.df$SR)         #seems like 4 outliers in this variable.
 
 #number of players with avg run rate above mean
 players.no <- ipl.df %>%
@@ -70,4 +76,19 @@ ipl.df1 %>%
        title = "Scatter plot of Salary vs Average runs") +
   theme_bw() 
 
+#Scatter plot of salary vs Strike rate
+ipl.df1 %>%
+  ggplot(aes(SR, Salary)) +
+  geom_point(aes(color = SR.category)) +
+  geom_smooth(method = "lm", se = F) +
+  labs(x = "Strike Rate by players",
+       y = "Salary in USD million",
+       title = "Scatter plot of Salary vs strike rate") +
+  theme_bw() 
+
+#Karl pearson correlation coefficients
+cor.df <- ipl.df %>%
+  select(Salary, SR, Avg) 
+  
+cor(cor.df)
          
