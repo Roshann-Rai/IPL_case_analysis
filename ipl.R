@@ -91,4 +91,7 @@ cor.df <- ipl.df %>%
   select(Salary, SR, Avg) 
   
 cor(cor.df)
-         
+
+#linear regression model of player salary
+model.salary <- lm(Salary ~ Avg + SR, data = ipl.df)
+summary(model.salary)         
