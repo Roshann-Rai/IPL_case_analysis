@@ -93,6 +93,10 @@ cor.df <- ipl.df %>%
   
 cor(cor.df)
 
-#linear regression model of player salary
-model.salary <- lm(Salary ~ Avg + SR, data = ipl.df)
-summary(model.salary)         
+#linear regression model of player average run
+#Avg runs has been assumed as the performance indicator.
+model.avg <- lm(Avg ~ Salary + SR, data = ipl.df)
+summary(model.avg)
+
+#It looks like 
+#
