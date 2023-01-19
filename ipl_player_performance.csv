@@ -1,0 +1,71 @@
+SN,Player,Team,Runs,Avg,SR,Hundreds,Fifties,Fours,Sixes,Salary 
+1,AB de Villiers,Royal Challengers Bangalore,442,44.20,154.00,0,5,31,26,1.71875
+2,Ajinkya Rahane,Rajasthan Royals,393,32.75,137.89,1,1,45,9,0.62500
+3,Akshdeep Nath,Royal Challengers Bangalore,61,12.20,107.01,0,0,5,2,0.51430
+4,Ambati Rayudu,Chennai Super Kings,282,23.50,93.06,0,1,20,7,0.34375
+5,Andre Russell,Kolkata Knight Riders,510,56.66,204.81,0,4,31,52,1.32813
+6,Axar Patel,Royal Challengers Bangalore,110,18.33,125.00,0,0,10,3,0.71430
+7,Ben Stokes,Rajasthan Royals,123,20.50,124.24,0,0,8,4,1.95313
+8,Bhuvneshwar Kumar,Sunrisers Hyderabad,12,4.00,63.15,0,0,1,0,1.32813
+9,Chris Gayle,Kings XI Punjab,490,40.83,153.60,0,4,45,34,0.31250
+10,Chris Lynn,Kolkata Knight Riders,405,31.15,139.65,0,4,41,22,1.50000
+11,Chris Morris,Delhi Capitals,32,5.33,86.48,0,0,1,2,1.71875
+12,Colin Ingram,Delhi Capitals,184,18.40,119.48,0,0,20,5,0.91430
+13,David Warner,Sunrisers Hyderabad,692,69.20,143.86,1,8,57,21,1.95313
+14,David Miller,Kings XI Punjab,213,26.62,129.87,0,1,19,7,0.46875
+15,Deepak Hooda,Sunrisers Hyderabad,64,10.66,101.58,0,0,5,1,0.56250
+16,Dinesh Karthik,Kolkata Knight Riders,253,31.62,146.24,0,2,22,14,1.15625
+17,Dwayne Bravo,Chennai Super Kings,80,16.00,121.21,0,0,6,3,1.00000
+18,Faf du Plessis,Chennai Super Kings,396,36.00,123.36,0,3,36,15,0.25000
+19,Hardik Pandya,Mumbai Indians,402,44.66,191.42,0,1,28,29,1.71875
+20,Ishan Kishan,Mumbai Indians,101,16.83,101.00,0,0,8,4,0.96875
+21,Jofra Archer,Rajasthan Royals,67,33.50,167.50,0,0,4,4,1.12500
+22,Jonny Bairstow,Sunrisers Hyderabad,445,55.62,157.24,1,2,48,18,0.31430
+23,Jos Buttler,Rajasthan Royals,311,38.87,151.70,0,3,38,14,0.68750
+24,Kane Williamson,Sunrisers Hyderabad,156,22.28,120.00,0,1,12,5,0.46875
+25,Kedar Jadhav,Chennai Super Kings,162,18.00,95.85,0,1,19,3,1.21875
+26,Keemo Paul,Rajasthan Royals,18,3.60,75.00,0,0,1,1,0.07140
+27,Kieron Pollard,Mumbai Indians,279,34.87,156.74,0,1,14,22,0.84375
+28,KL Rahul,Kings XI Punjab,593,53.90,135.38,1,6,49,25,1.71875
+29,Krunal Pandya,Mumbai Indians,183,16.63,122.00,0,0,18,5,1.37500
+30,Mandeep Singh,Kings XI Punjab,165,41.25,137.50,0,0,10,4,0.21875
+31,Manish Pandey,Sunrisers Hyderabad,344,43.00,130.79,0,3,34,6,1.71875
+32,Marcus Stoinis,Royal Challengers Bangalore,211,52.75,135.25,0,0,14,10,0.96875
+33,Mayank Agarwal,Kings XI Punjab,332,25.53,141.88,0,2,26,14,0.15625
+34,Moeen Ali,Royal Challengers Bangalore,220,27.50,165.41,0,2,16,17,0.26563
+35,Mohammad Nabi,Sunrisers Hyderabad,115,19.16,151.31,0,0,8,7,0.15625
+36,MS Dhoni,Chennai Super Kings,416,83.20,134.62,0,3,22,23,2.34375
+37,Nicholas Pooran,Kings XI Punjab,168,28.00,157.00,0,0,10,14,0.60000
+38,Nitish Rana,Kolkata Knight Riders,344,34.40,146.38,0,3,27,21,0.53125
+39,Parthiv Patel,Royal Challengers Bangalore,373,26.64,139.17,0,2,48,10,0.26563
+40,Piyush Chawla,Kolkata Knight Riders,42,14.00,113.51,0,0,4,2,0.65625
+41,Prithvi Shaw,Delhi Capitals,353,22.06,133.71,0,2,45,9,0.18750
+42,Quinton de Kock,Mumbai Indians,529,35.26,132.91,0,4,45,25,0.43750
+43,Rahul Tripathi,Rajasthan Royals,141,23.50,119.49,0,1,13,2,0.53125
+44,Rashid Khan,Sunrisers Hyderabad,34,6.80,147.82,0,0,2,2,1.40625
+45,Ravichandran Ashwin,Kings XI Punjab,42,8.40,150.00,0,0,3,3,1.18750
+46,Ravindra Jadeja,Chennai Super Kings,106,35.33,120.45,0,0,7,4,1.09375
+47,Rishabh Pant,Delhi Capitals,488,37.53,162.66,0,3,37,27,2.34375
+48,Riyan Parag,Rajasthan Royals,160,32.00,126.98,0,1,17,5,0.02860
+49,Robin Uthappa,Kolkata Knight Riders,282,31.33,115.10,0,1,28,10,1.00000
+50,Rohit Sharma,Mumbai Indians,405,28.92,128.57,0,2,52,10,2.34375
+51,Sam Curran,Kings XI Punjab,95,23.75,172.72,0,1,13,3,1.02860
+52,Sanju Samson,Rajasthan Royals,342,34.20,148.69,1,0,28,13,1.25000
+55,Sarfaraz Khan,Kings XI Punjab,180,45.00,125.87,0,1,19,4,0.03570
+56,Shane Watson,Chennai Super Kings,398,23.41,127.56,0,3,42,20,0.62500
+57,Sherfane Rutherford,Delhi Capitals,73,14.60,135.18,0,0,2,7,0.28570
+60,Shikhar Dhawan,Delhi Capitals,521,34.73,135.67,0,5,64,11,0.81250
+61,Shimron Hetmyer,Royal Challengers Bangalore,90,18.00,123.28,0,1,4,7,0.60000
+63,Shreyas Gopal,Rajasthan Royals,63,15.75,136.95,0,0,8,1,0.03125
+64,Shreyas Iyer,Delhi Capitals,463,30.86,119.94,0,3,41,14,1.09375
+65,Shubman Gill,Kolkata Knight Riders,296,32.88,124.36,0,3,21,10,0.28125
+67,Steve Smith,Rajasthan Royals,319,39.87,116.00,0,3,30,4,1.95313
+68,Stuart Binny,Rajasthan Royals,70,23.33,175.00,0,0,5,4,0.07813
+71,Sunil Narine,Kolkata Knight Riders,143,17.87,166.27,0,0,17,9,1.95313
+72,Suresh Raina,Chennai Super Kings,383,23.93,121.97,0,3,45,9,1.71875
+74,Suryakumar Yadav,Mumbai Indians,424,32.61,130.86,0,2,45,10,0.50000
+76,Umesh Yadav,Kolkata Knight Riders,25,12.50,100.00,0,0,3,1,0.65625
+77,Vijay Shankar,Sunrisers Hyderabad,244,20.33,126.42,0,0,11,12,0.50000
+80,Virat Kohli,Royal Challengers Bangalore,464,33.14,141.46,1,2,46,13,2.65625
+84,Wriddhiman Saha,Sunrisers Hyderabad,86,17.20,162.26,0,0,13,1,0.17140
+92,Yusuf Pathan,Sunrisers Hyderabad,40,13.33,88.88,0,0,1,1,0.29688
