@@ -1,9 +1,11 @@
 install.packages("forcats")
+install.packages("plotly")
 #importing libraries
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
 library(forcats)      #fct_reorder() function
+library(plotly)
 
 #importing dataset
 ipl.df <- read.csv("https://raw.githubusercontent.com/Roshann-Rai/IPL_case_analysis/main/ipl_player_performance.csv")
@@ -90,14 +92,14 @@ ipl.df1 %>%
   theme_bw() 
 
 #Scatter plot of salary vs Strike rate
-ipl.df1 %>%
+ggplotly(ipl.df1 %>%
   ggplot(aes(SR, Salary)) +
   geom_point(aes(color = SR.category)) +
   geom_smooth(method = "lm", se = F) +
   labs(x = "Strike Rate by players",
        y = "Salary in USD million",
        title = "Scatter plot of Salary vs strike rate") +
-  theme_bw() 
+  theme_bw(), tooltip = c("Player", "SR", "Salary")) 
 
 #Karl pearson correlation coefficients
 cor.df <- ipl.df %>%
@@ -113,18 +115,15 @@ t.test.df <- ipl.df1 %>%
             SD = sd(Salary),
             samp_size = n())
 
-# ggplot(ipl.df1, aes(x = Salary)) + 
-#   geom_histogram(binwidth = 0.5) + 
-#   facet_wrap(~player.category, ncol = 1)
-
-#Alternative hypothesis --> Income of good players is greater than bad players.
 t.test(Salary ~ player.category, ipl.df1, alternative = "less")
+#At 5% significance level, p-value is less than 0.05 so, alternative hypothesis is accepted.
+#i.e. Salary of players with good performance is greater than that of player with bad performance.
 
 #linear regression model of player average run
 #Avg runs has been assumed as the performance indicator.
 model.salary <- lm(Salary ~ Avg + SR, data = ipl.df)
 summary(model.salary)
-
-
-#It looks like 
-?t.test()
+#Salary is significantly affected Average run (at 5% level of significance) rate but not by strike rate.
+#The linear model is salary = 0.6421 + 0.014Avg + Error
+#Adjusted R-square = 0.059 i.e., salary is only determined 5% by Avg variable and rest by the variables not present in this linear regression model.
+#It suggests that we need to identify more variables to determine the salary of player.
