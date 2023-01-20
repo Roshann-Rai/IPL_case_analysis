@@ -18,6 +18,29 @@ colSums(is.na(ipl.df))
 ipl.df$Player <- gsub("<a0>", " ", ipl.df$Player)
 head(ipl.df)
 
+#summary statistics
+summary(ipl.df$Avg)
+summary(ipl.df$SR)
+summary(ipl.df$Salary)
+
+#boxplot
+boxplot(ipl.df$SR)
+title("Strike Rate of Players")
+
+boxplot(ipl.df$Salary)
+title("Salary of Players")
+
+boxplot(ipl.df$Avg)
+title("Average runs of players")
+#It looks like there are two outliers in this variable.
+#seems like 4 outliers in this variable.
+
+#Players with outstanding performance
+players.no <- ipl.df %>%
+  filter(Avg > 35.16 & SR > 148.47) 
+
+players.no
+
 #Creating a new categorical variable from Avg variable
 ipl.df1 <- ipl.df %>%
   mutate(Avg.run.category = case_when(Avg < 20 ~ "Less than 20",
@@ -28,20 +51,9 @@ ipl.df1 <- ipl.df %>%
          SR.category = case_when(SR < 75 ~ "Less than 75",
                                  SR < 150 & SR >= 75 ~ "75-150",
                                  SR < 225 & SR >= 150 ~ "150-225",
-                                 TRUE ~ "Above 225"))
-
-#summary statistics
-summary(ipl.df$Avg)
-summary(ipl.df$SR)
-summary(ipl.df$Salary)
-boxplot(ipl.df$Avg)        #It looks like there are two outliers in this variable.
-boxplot(ipl.df$Salary)
-boxplot(ipl.df$SR)         #seems like 4 outliers in this variable.
-
-#number of players with avg run rate above mean
-players.no <- ipl.df %>%
-  filter(Avg > 28.58) %>%
-  count(Player)
+                                 TRUE ~ "Above 225"),
+         player.category = case_when(Avg >= 28.58 & SR >= 133.12 ~ "Good Player Performance",
+                                     TRUE ~ "Bad Player Performance"))
 
 #plotting the players avg run
 ipl.df %>%
@@ -93,10 +105,26 @@ cor.df <- ipl.df %>%
   
 cor(cor.df)
 
+#Two sample t test
+t.test.df <- ipl.df1 %>%
+  select(player.category, Salary) %>%
+  group_by(player.category) %>%
+  summarise(Mean = mean(Salary),
+            SD = sd(Salary),
+            samp_size = n())
+
+# ggplot(ipl.df1, aes(x = Salary)) + 
+#   geom_histogram(binwidth = 0.5) + 
+#   facet_wrap(~player.category, ncol = 1)
+
+#Alternative hypothesis --> Income of good players is greater than bad players.
+t.test(Salary ~ player.category, ipl.df1, alternative = "less")
+
 #linear regression model of player average run
 #Avg runs has been assumed as the performance indicator.
-model.avg <- lm(Avg ~ Salary + SR, data = ipl.df)
-summary(model.avg)
+model.salary <- lm(Salary ~ Avg + SR, data = ipl.df)
+summary(model.salary)
+
 
 #It looks like 
-#
+?t.test()
