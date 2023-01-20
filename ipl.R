@@ -39,7 +39,7 @@ title("Average runs of players")
 
 #Players with outstanding performance
 players.no <- ipl.df %>%
-  filter(Avg > 35.16 & SR > 148.47) 
+  filter(Avg > 35.16 & SR > 148.47)
 
 players.no
 
@@ -58,7 +58,7 @@ ipl.df1 <- ipl.df %>%
                                      TRUE ~ "Bad Player Performance"))
 
 #plotting the players avg run
-ipl.df %>%
+p1 <- ipl.df %>%
   mutate(player.reordered = fct_reorder(Player, Avg)) %>%
   ggplot(aes(player.reordered, Avg)) +
   geom_col() +
@@ -68,9 +68,10 @@ ipl.df %>%
        title = "Players Average run") +
   theme_bw() +
   coord_flip()
+p1
 
 #plotting the players salary
-ipl.df %>%
+p2 <- ipl.df %>%
   mutate(player.reordered = fct_reorder(Player, Salary)) %>%
   ggplot(aes(player.reordered, Salary)) +
   geom_col() +
@@ -80,9 +81,10 @@ ipl.df %>%
   geom_text(aes(label = Salary), hjust = 0, size = 3.2) +
   theme_bw() +
   coord_flip()
-  
+p2  
+
 #scatter plot of salary vs avg runs
-ipl.df1 %>%
+p3 <- ipl.df1 %>%
   ggplot(aes(Avg, Salary)) +
   geom_point(aes(color = Avg.run.category)) +
   geom_smooth(method = "lm", se = F) +
@@ -90,16 +92,18 @@ ipl.df1 %>%
        y = "Salary in USD million",
        title = "Scatter plot of Salary vs Average runs") +
   theme_bw() 
+ggplotly(p3)
 
 #Scatter plot of salary vs Strike rate
-ggplotly(ipl.df1 %>%
+p4 <- ipl.df1 %>%
   ggplot(aes(SR, Salary)) +
   geom_point(aes(color = SR.category)) +
   geom_smooth(method = "lm", se = F) +
   labs(x = "Strike Rate by players",
        y = "Salary in USD million",
        title = "Scatter plot of Salary vs strike rate") +
-  theme_bw(), tooltip = c("Player", "SR", "Salary")) 
+  theme_bw()
+ggplotly(p4)
 
 #Karl pearson correlation coefficients
 cor.df <- ipl.df %>%
