@@ -18,17 +18,17 @@ h1.title {
   color: DarkRed;
 }
 h1 { /* Header 1 */
-  font-size: 34px;
+  font-size: 26px;
   color: Black;
   font-family: "Times New Roman", Times, serif;
 }
 h2 { /* Header 2 */
-    font-size: 30px;
+    font-size: 22px;
   color: Black;
   font-family: "Times New Roman", Times, serif;
 }
 h3 { /* Header 3 */
-  font-size: 24px;
+  font-size: 20px;
   font-family: "Times New Roman", Times, serif;
   color: Black;
 }
