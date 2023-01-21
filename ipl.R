@@ -118,7 +118,7 @@ t.test.df <- ipl.df1 %>%
   summarise(Mean = mean(Salary),
             SD = sd(Salary),
             samp_size = n())
-
+t.test.df
 t.test(Salary ~ player.category, ipl.df1, alternative = "less")
 #At 5% significance level, p-value is less than 0.05 so, alternative hypothesis is accepted.
 #i.e. Salary of players with good performance is greater than that of player with bad performance.
