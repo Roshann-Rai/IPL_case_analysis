@@ -1,6 +1,19 @@
 ---
 title: "IPL Case Study"
-author: "Group-IV"
+subtitle: |
+  |
+ 
+author: |
+  | Roshan Rai (21131)
+  | Kshitiz Vaidya (21140)
+  | Shachee Shrestha (21135)
+  | Ashmita Karki (21119)
+  |
+  |
+
+  | Submitted to
+  | Asst. Prof. Srawan K.c
+  |
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -106,48 +119,47 @@ ipl.df1 <- ipl.df %>%
                                  TRUE ~ "Above 225"),
          player.category = case_when(Avg >= 28.58 & SR >= 133.12 ~ "Good Player Performance",
                                      TRUE ~ "Bad Player Performance"))
+head(ipl.df1,5)
 ```
 
-## **4.2 Summary Statistics**
-Let's examine the summary statistics of Avg, SR and Salary variables.
-```{r, warning=FALSE, class.source="bg-danger", class.output="bg-success"}
-summary(ipl.df$Avg)
-summary(ipl.df$SR)
-summary(ipl.df$Salary)
-```
+## **4.2 Summary Statistics and Boxplots**
+Let's examine the summary statistics and boxplots of Avg, SR and Salary variables.
 
-## **4.3 Boxplots**
-### **4.3.1 Boxplot of Strike rate of players**
+### **4.2.1 Descriptive statistics and Boxplot of Average run rate**
 ```{r, warning=FALSE, fig.align="center", fig.dim=c(4,4), class.source="bg-danger", class.output="bg-success"}
+summary(ipl.df$Avg)
+boxplot(ipl.df$Avg)
+title("Batting Average of players")
+```
+
+### **4.2.2 Descriptive statistics and boxplot of strike rate**
+```{r, warning=FALSE, fig.align="center", fig.dim=c(4,4), class.source="bg-danger", class.output="bg-success"}
+summary(ipl.df$SR)
 boxplot(ipl.df$SR)
 title("Strike Rate of Players")
 ```
-It looks like there are 4 outliers in SR variable.
 
-### **4.3.2 Boxplot of Salary of Players**
+### **4.2.3 Descriptive statistics and boxplot of Salary**
 ```{r, warning=FALSE, fig.align="center", fig.dim=c(4,4), class.source="bg-danger", class.output="bg-success"}
+summary(ipl.df$Salary)
 boxplot(ipl.df$Salary)
 title("Salary of Players")
 ```
 
-### **4.3.3 Boxplot of Average runs of players**
-```{r, warning=FALSE, fig.align="center", fig.dim=c(4,4), class.source="bg-danger", class.output="bg-success"}
-boxplot(ipl.df$Avg)
-title("Average runs of players")
-```
 It looks like there are two outliers in this variable.
 
-## **4.4 Outstanding Players**
+## **4.3 Outstanding Players**
 ```{r, warning=FALSE, class.source="bg-danger", class.output="bg-success"}
 #Players with outstanding performance
 players.no <- ipl.df %>%
-  filter(Avg > 35.16 & SR > 148.47)
+  filter(Avg > 35.16 & SR > 148.47) %>%
+  select(Player)
 
 players.no
 ```
 
-##  **4.5 Plots**
-### **4.5.1 Barplot of average runs of all players**
+##  **4.4 Plots**
+### **4.4.1 Barplot of batting average of all players**
 ```{r, warning=FALSE, fig.dim=c(8,10), fig.align = "center", class.source="bg-danger", class.output="bg-success", message=FALSE}
 #plotting the players avg run
 p1 <- ipl.df %>%
@@ -155,23 +167,23 @@ p1 <- ipl.df %>%
   ggplot(aes(player.reordered, Avg)) +
   geom_col() +
   #geom_text(aes(label = Avg), hjust = 0, size = 3.2) +
-  labs(x = "Average runs by Player",
-       y = "",
-       title = "Players Average run") +
+  labs(x = "",
+       y = "Batting Average by Player",
+       title = "Players Batting Average") +
   theme_bw() +
   coord_flip()
 ggplotly(p1)
 ```
 
-### **4.5.2 Barplot of salary of all players**
+### **4.4.2 Barplot of salary of all players**
 ```{r, warning=FALSE, fig.dim=c(8,10), fig.align = "center", class.source="bg-danger", class.output="bg-success", message=FALSE}
 #plotting the players salary
 p2 <- ipl.df %>%
   mutate(player.reordered = fct_reorder(Player, Salary)) %>%
   ggplot(aes(player.reordered, Salary)) +
   geom_col() +
-  labs(x = "Salary in USD million",
-       y = "",
+  labs(x = "",
+       y = "Salary in USD million",
        title = "Salary earned by players in IPL") +
   #geom_text(aes(label = Salary), hjust = 0, size = 3.2) +
   theme_bw() +
@@ -179,21 +191,21 @@ p2 <- ipl.df %>%
 ggplotly(p2)
 ```
 
-### **4.5.3 Scatter plot of salary vs average runs**
+### **4.4.3 Scatter plot of salary vs batting average**
 ```{r, warning = FALSE, fig.align = "center", class.source="bg-danger", class.output="bg-success", message=FALSE}
 #scatter plot of salary vs avg runs
 p3 <- ipl.df1 %>%
   ggplot(aes(Avg, Salary)) +
   geom_point(aes(color = Avg.run.category)) +
   geom_smooth(method = "lm", se = F) +
-  labs(x = "Average run by players",
+  labs(x = "Batting average by players",
        y = "Salary in USD million",
        title = "Scatter plot of Salary vs Average runs") +
   theme_bw() 
 ggplotly(p3)
 ```
 
-### **4.5.4 Scatter plot of salary vs strike rate**
+### **4.4.4 Scatter plot of salary vs strike rate**
 ```{r, warning = FALSE, fig.align = "center", message=FALSE, class.source="bg-danger", class.output="bg-success"}
 #Scatter plot of salary vs Strike rate
 p4 <- ipl.df1 %>%
@@ -207,16 +219,16 @@ p4 <- ipl.df1 %>%
 ggplotly(p4)
 ```
 
-## **4.6 Karl Pearson Correlation coefficients**
+## **4.5 Karl Pearson Correlation coefficients**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success", message = FALSE}
 #Karl pearson correlation coefficients
 cor.df <- ipl.df %>%
   select(Salary, SR, Avg) 
 cor(cor.df)
 ```
-The correlation coefficient between Salary and Strike rate is 0.1056 indicating very weak but positive relationship between them. Similarly, the correlation coefficient between Average runs and Strike rate is 0.4587 indicating positive and moderate strength of association between the two while the correlation coefficient between Salary and Average runs is 0.292 indicating weak and positive relationship between the two.
+The correlation coefficient between Salary and Strike rate is 0.1056 indicating very weak but positive relationship between them. Similarly, the correlation coefficient between batting average and Strike rate is 0.4587 indicating positive and moderate strength of association between the two while the correlation coefficient between Salary and Average runs is 0.292 indicating weak and positive relationship between the two.
 
-## **4.7 Two Sample t-test**
+## **4.6 Two Sample t-test**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success", message=FALSE}
 #Two sample t test
 t.test.df <- ipl.df1 %>%
@@ -239,9 +251,9 @@ t.test(Salary ~ player.category, ipl.df1, alternative = "less")
 At 5% significance level, p-value is less than 0.05 so, alternative hypothesis is accepted.
 i.e. Salary of players with good performance is greater than that of player with bad performance.
 
-## **4.8 Linear Regression**
+## **4.7 Linear Regression**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success", message=FALSE}
-#linear regression model of player average run
+#linear regression model of player batting average
 #Avg runs has been assumed as the performance indicator.
 model.salary <- lm(Salary ~ Avg + SR, data = ipl.df)
 summary(model.salary)
@@ -250,4 +262,10 @@ Salary is significantly affected Average run (at 5% level of significance) rate 
 The linear model is salary = 0.6421 + 0.014Avg + Error.
 Adjusted R-square = 0.059 i.e., salary is only determined 5% by Avg variable and rest by the variables not present in this linear regression model.
 It suggests that we need to identify more variables to determine the salary of player.
+
+```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success", message=FALSE}
+model.salary1 <- lm(Salary ~ Avg + SR + Runs + Hundreds + Fifties, data = ipl.df)
+summary(model.salary1)
+```
+
 

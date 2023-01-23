@@ -1,5 +1,3 @@
-install.packages("forcats")
-install.packages("plotly")
 #importing libraries
 library(dplyr)
 library(tidyverse)
@@ -56,16 +54,16 @@ ipl.df1 <- ipl.df %>%
                                  TRUE ~ "Above 225"),
          player.category = case_when(Avg >= 28.58 & SR >= 133.12 ~ "Good Player Performance",
                                      TRUE ~ "Bad Player Performance"))
-
+setwd("D:/roshan/IPL_case_analysis")
 #plotting the players avg run
 p1 <- ipl.df %>%
   mutate(player.reordered = fct_reorder(Player, Avg)) %>%
   ggplot(aes(player.reordered, Avg)) +
   geom_col() +
   geom_text(aes(label = Avg), hjust = 0, size = 3.2) +
-  labs(x = "Average runs by Player",
-       y = "",
-       title = "Players Average run") +
+  labs(x = "",
+       y = "Batting average of Player",
+       title = "Players Batting average") +
   theme_bw() +
   coord_flip()
 p1
@@ -75,8 +73,8 @@ p2 <- ipl.df %>%
   mutate(player.reordered = fct_reorder(Player, Salary)) %>%
   ggplot(aes(player.reordered, Salary)) +
   geom_col() +
-  labs(x = "Salary in USD million",
-       y = "",
+  labs(x = "",
+       y = "Salary in USD million",
        title = "Salary earned by players in IPL") +
   geom_text(aes(label = Salary), hjust = 0, size = 3.2) +
   theme_bw() +
@@ -131,3 +129,6 @@ summary(model.salary)
 #The linear model is salary = 0.6421 + 0.014Avg + Error
 #Adjusted R-square = 0.059 i.e., salary is only determined 5% by Avg variable and rest by the variables not present in this linear regression model.
 #It suggests that we need to identify more variables to determine the salary of player.
+
+model.salary1 <- lm(Salary ~ Avg + SR + Fifties + Hundreds, data = ipl.df)
+summary(model.salary1)
