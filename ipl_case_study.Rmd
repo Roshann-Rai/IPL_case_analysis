@@ -4,6 +4,7 @@ subtitle: |
   |
  
 author: |
+  | Group IV 
   | Roshan Rai (21131)
   | Kshitiz Vaidya (21140)
   | Shachee Shrestha (21135)
@@ -13,7 +14,8 @@ author: |
 
   | Submitted to
   | Asst. Prof. Srawan K.c
-  |
+  | Kathmandu University School of Management
+  | Balkumari, Lalitpur
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -69,7 +71,16 @@ code.r{ /* Code block */
   font-weight: bold;
 }
 ```
-# **1. Importing Libraries**
+#  **1. Synopsis of case**
+When the Indian Premier League debuted in 2008, it marked the beginning of cricket's glorification because it changed the sport's landscape both in India and around the world, putting it on par with US sports leagues like the NBA and NFL. Cricket is played in a T20 style in the IPL, which has combined entertainment and the game. Due to the fact that two games can be played in a single day, it has been a commercial success. Such leagues have been inspired by it in other cricketing nations like Australia, Pakistan, and the West Indies.
+
+IPL is a brand with a significant viewership and a successful business plan. Teams invested a lot of money in marketing, as well as in lucrative sponsorships and brand-name advertising. Although the IPL has several revenue streams, good cricket is still its main focus. It has become more exciting because to the inclusion of foreign players and emerging talent in IPL teams. Teams constantly need to make the correct player choices to demonstrate and elicit performance as needed. Teams therefore spent a lot of money on the necessary players, with auction bids exceeding 50 million rupees. Each team had a limit of 850 million rupees to spend on players. And star players were regarded as decisive players who chased down runs in the closing minutes of the game or who acted as a barrier for the opposing team. They received high salaries and had a high brand value. Additionally, because match results frequently favored them, batsmen typically had a high worth.
+
+As the seasons began, the performance of these supposedly star players frequently fell short of expectations, and their high pay came under scrutiny. Asmit Mitra, a top analyst, decided to undertake an analysis as part of his concluding article for the 2019 Indian Premier League season, while most reporters and analysts chose to base their work on feelings, mood, and widely held beliefs. This article would examine the performance of overrated hitters by creating a generic batting performance index. He believed that organizations needed to examine their spending on player types more closely. He already had the data he needed for 70 players; all he needed were the appropriate tools for analysis.
+
+# **2. Data Exploration and Analysis**
+
+## **2.1 Importing Libraries**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success", message = FALSE}
 library(dplyr)
 library(tidyverse)
@@ -79,7 +90,7 @@ library(plotly)
 ```
 **forcats** is for fct_reorder() funtion and **plotly** is for ggplotly() function. 
 
-# **2. Importing datasets**
+## **2.2 Importing datasets**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success"}
 ipl.df <- read.csv("https://raw.githubusercontent.com/Roshann-Rai/IPL_case_analysis/main/ipl_player_performance.csv")
 head(ipl.df)
@@ -87,15 +98,14 @@ str(ipl.df)
 ```
 The ipl.df has 11 variables and 70 rows. Except **Player** and **Team** variables other are numeric.
 
-# **3. Data Cleaning**
-## **3.1 Missing Data?**
+## **2.3 Missing Data?**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success"}
 #checking if there are missing data
 colSums(is.na(ipl.df))
 ```
 It seems there are no missing data.
 
-## **3.2 Removing some characters**
+## **2.4 Removing some characters**
 Looks like the the **Player** variable has observations with **<a0>** character which must be removed. **gsub()** function helps to replace **<a0>** by space.
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success"}
 #Removing <a0> from the player names
@@ -103,8 +113,7 @@ ipl.df$Player <- gsub("<a0>", " ", ipl.df$Player)
 head(ipl.df)
 ```
 
-# **4. Data manipulation and data insights**
-## **4.1 Creating new categorical variables**
+## **2.5 Creating new categorical variables**
 ```{r, warning=FALSE, class.source="bg-danger", class.output="bg-success"}
 #Creating a new categorical variable from Avg variable
 ipl.df1 <- ipl.df %>%
@@ -122,24 +131,24 @@ ipl.df1 <- ipl.df %>%
 head(ipl.df1,5)
 ```
 
-## **4.2 Summary Statistics and Boxplots**
+## **2.6 Summary Statistics and Boxplots**
 Let's examine the summary statistics and boxplots of Avg, SR and Salary variables.
 
-### **4.2.1 Descriptive statistics and Boxplot of Average run rate**
+### **2.6.1 Descriptive statistics and Boxplot of batting rate**
 ```{r, warning=FALSE, fig.align="center", fig.dim=c(4,4), class.source="bg-danger", class.output="bg-success"}
 summary(ipl.df$Avg)
 boxplot(ipl.df$Avg)
-title("Batting Average of players")
+title("Batting Rate of players")
 ```
 
-### **4.2.2 Descriptive statistics and boxplot of strike rate**
+### **2.6.2 Descriptive statistics and boxplot of strike rate**
 ```{r, warning=FALSE, fig.align="center", fig.dim=c(4,4), class.source="bg-danger", class.output="bg-success"}
 summary(ipl.df$SR)
 boxplot(ipl.df$SR)
 title("Strike Rate of Players")
 ```
 
-### **4.2.3 Descriptive statistics and boxplot of Salary**
+### **2.6.3 Descriptive statistics and boxplot of Salary**
 ```{r, warning=FALSE, fig.align="center", fig.dim=c(4,4), class.source="bg-danger", class.output="bg-success"}
 summary(ipl.df$Salary)
 boxplot(ipl.df$Salary)
@@ -148,7 +157,8 @@ title("Salary of Players")
 
 It looks like there are two outliers in this variable.
 
-## **4.3 Outstanding Players**
+## **2.7 Outstanding Players**
+We assumed that player with batting rate and strike rate greater than 35.16 and 148.47 respectively are to be considered as outstanding players. These numbers are the third quartile of batting rate and strike rate variables and are consistent with the number given by cricket association standards. Based on this assumption, we found that only 7 players are to be considered outstanding.
 ```{r, warning=FALSE, class.source="bg-danger", class.output="bg-success"}
 #Players with outstanding performance
 players.no <- ipl.df %>%
@@ -158,8 +168,8 @@ players.no <- ipl.df %>%
 players.no
 ```
 
-##  **4.4 Plots**
-### **4.4.1 Barplot of batting average of all players**
+##  **2.8 Plots**
+### **2.8.1 Barplot of batting rate of all players**
 ```{r, warning=FALSE, fig.dim=c(8,10), fig.align = "center", class.source="bg-danger", class.output="bg-success", message=FALSE}
 #plotting the players avg run
 p1 <- ipl.df %>%
@@ -175,7 +185,7 @@ p1 <- ipl.df %>%
 ggplotly(p1)
 ```
 
-### **4.4.2 Barplot of salary of all players**
+### **2.8.2 Barplot of salary of all players**
 ```{r, warning=FALSE, fig.dim=c(8,10), fig.align = "center", class.source="bg-danger", class.output="bg-success", message=FALSE}
 #plotting the players salary
 p2 <- ipl.df %>%
@@ -191,21 +201,23 @@ p2 <- ipl.df %>%
 ggplotly(p2)
 ```
 
-### **4.4.3 Scatter plot of salary vs batting average**
+### **2.8.3 Scatter plot of salary vs batting rate**
+This scatter plot shows the weak and positive relationship between the two.
 ```{r, warning = FALSE, fig.align = "center", class.source="bg-danger", class.output="bg-success", message=FALSE}
 #scatter plot of salary vs avg runs
 p3 <- ipl.df1 %>%
   ggplot(aes(Avg, Salary)) +
   geom_point(aes(color = Avg.run.category)) +
   geom_smooth(method = "lm", se = F) +
-  labs(x = "Batting average by players",
+  labs(x = "Batting rate by players",
        y = "Salary in USD million",
        title = "Scatter plot of Salary vs Average runs") +
   theme_bw() 
 ggplotly(p3)
 ```
 
-### **4.4.4 Scatter plot of salary vs strike rate**
+### **2.8.4 Scatter plot of salary vs strike rate**
+This scatter plot shows the very weak and positive relationship between the two.
 ```{r, warning = FALSE, fig.align = "center", message=FALSE, class.source="bg-danger", class.output="bg-success"}
 #Scatter plot of salary vs Strike rate
 p4 <- ipl.df1 %>%
@@ -219,7 +231,7 @@ p4 <- ipl.df1 %>%
 ggplotly(p4)
 ```
 
-## **4.5 Karl Pearson Correlation coefficients**
+## **2.9 Karl Pearson Correlation coefficients**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success", message = FALSE}
 #Karl pearson correlation coefficients
 cor.df <- ipl.df %>%
@@ -228,7 +240,7 @@ cor(cor.df)
 ```
 The correlation coefficient between Salary and Strike rate is 0.1056 indicating very weak but positive relationship between them. Similarly, the correlation coefficient between batting average and Strike rate is 0.4587 indicating positive and moderate strength of association between the two while the correlation coefficient between Salary and Average runs is 0.292 indicating weak and positive relationship between the two.
 
-## **4.6 Two Sample t-test**
+## **2.10 Two Sample t-test**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success", message=FALSE}
 #Two sample t test
 t.test.df <- ipl.df1 %>%
@@ -251,7 +263,7 @@ t.test(Salary ~ player.category, ipl.df1, alternative = "less")
 At 5% significance level, p-value is less than 0.05 so, alternative hypothesis is accepted.
 i.e. Salary of players with good performance is greater than that of player with bad performance.
 
-## **4.7 Linear Regression**
+## **2.11 Linear Regression**
 ```{r, warning = FALSE, class.source="bg-danger", class.output="bg-success", message=FALSE}
 #linear regression model of player batting average
 #Avg runs has been assumed as the performance indicator.
@@ -267,5 +279,11 @@ It suggests that we need to identify more variables to determine the salary of p
 model.salary1 <- lm(Salary ~ Avg + SR + Runs + Hundreds + Fifties, data = ipl.df)
 summary(model.salary1)
 ```
+When salary regression model using batting rate, strike rate, runs, hundreds and fifties are used, the model has no significant variables. This may be because all factors have some dependency on each other. It further suggest that there is no requirement of **100-plus** to be added in the dataset for the analysis.
 
+# **3. Conclusion**
+
+* The accusations made to IPL teams that they are wasting money by spending on players with bad performance is found irrelevant from the sample t-test. However, our test depends on the assumption of player category of good and bad players. If the standards to be good player is increased, the sample t-test may give different result.
+* From the regression analysis, it can be concluded that batting rate only determines 6% variance in salary and rest by other factors not accounted in the model. The coefficient of determination (R^2) is too low for a predictive model. We need to find other variables that can independently affect salary variable.
+* Other thing is that there may be other performance indicator of batsmen other than batting rate and strike rate that must be determined which can help to create better predictive model for salary.
 
